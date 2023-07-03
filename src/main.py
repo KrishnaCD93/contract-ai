@@ -1,8 +1,8 @@
 from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from agent import Agent
-from agent import get_embedding
+from src.agent import Agent
+from src.agent import get_embedding
 
 app = FastAPI()
 

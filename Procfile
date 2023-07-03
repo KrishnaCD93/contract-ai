@@ -1,1 +1,1 @@
-web: uvicorn main:app --host
+web: uvicorn main:app

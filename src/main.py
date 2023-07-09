@@ -1,7 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.agent import Agent
+from src.agent import ChatBot
 from src.agent import get_embedding
 
 app = FastAPI()
@@ -31,7 +31,7 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 @app.get("/predict/{input}")
 async def predict(input: str):
     print(f"Input: {input}")
-    agent = Agent(model_name="gpt-3.5-turbo-0613", temperature=0.9)
+    agent = ChatBot(model_name="gpt-3.5-turbo-0613", temperature=0.9)
     predition = agent.get_response(input)
     if predition:
         return {"prediction": predition, "error": None}

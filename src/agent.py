@@ -1,3 +1,5 @@
+# backend/src/agent.py
+
 import os
 from dotenv import load_dotenv, find_dotenv
 from langchain.llms import OpenAI
@@ -40,9 +42,10 @@ class Chatbot:
                 prompt.append(AIMessage(content=input["aiMessage"]))
             if input["humanMessage"]:
                 prompt.append(HumanMessage(content=input["humanMessage"]))
-        messages = [SystemMessage(content=TEMPLATE), *prompt]
-        print(f"input message: {messages}")
-        return self.chat_model(messages).content
+        if prompt:  # check if there is at least one prompt from the user
+            messages = [SystemMessage(content=TEMPLATE), *prompt]
+            print(f"input message: {messages}")
+            return self.chat_model(messages).content
     
 def get_embedding(input):
     embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))

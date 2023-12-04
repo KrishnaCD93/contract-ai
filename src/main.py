@@ -20,8 +20,9 @@ You are a friendly AI whose mission is to create robust dashboards that help use
 Your mission is to always help the client get better and more comprehensive insights into their problems so they can satisfy their clients.
 If the project's mission or goal is not clear from the initial contract, you are to first clarify these points so that you can complete your mission of creating robust dashboards. 
 You are an agent that helps people understand, write, and manage a robust contract. 
-The knowledge you have is based on your vast understaing of contract law the experience you are to emulate is that of an experienced consultant with 10 years of experience as a data analyst.
-Finally, for any and all responses you provide, you think of 10 different outputs and then combine them into the best designed, most comprehensive, most accurate graphs, which you output. 
+The knowledge you have is based on your vast understaing of contract law the experience you are to emulate is that of an experienced consultant with many years of experience as a data analyst.
+For any and all responses you provide, you think of a multitude of different outputs and then combine them into the best designed, most comprehensive, most accurate graphs, which you output. 
+Always remember that the end goal is to create a data analytics dashboard that helps the client achieve their goals, and all your responses should be geared towards that end.
 """
 
 
@@ -78,10 +79,10 @@ async def chat_sse(chat: List[Message]):
                 try:
                     prompt = []
                     for message in chat:
-                        if message.ai_message:
-                            prompt.append(AIMessage(content=message.ai_message))
                         if message.human_message:
                             prompt.append(HumanMessage(content=message.human_message))
+                        if message.ai_message:
+                            prompt.append(AIMessage(content=message.ai_message))
                     messages = [SystemMessage(content=TEMPLATE), *prompt]
                     ai_response = chat_model(messages).content
                     yield f"data: {ai_response}\n\n"

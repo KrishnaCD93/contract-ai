@@ -60,11 +60,14 @@ async def embed(input: str):
         return {"embedding": None, "error": "Error retrieving embeddings"}
 
 
-# @input: messages: dictionary of messages [{ aiMessage: "message", humanMessage: "message" }]
-# @message: a list of strings starting with template then alternating between ai and human messages
-# @output: AI response: string
 @app.post("/chat")
 async def chat_sse(chat: List[Message]):
+    """
+    :param input: messages: dictionary of messages [{ aiMessage: "message", humanMessage: "message" }]
+    :param message: a list of strings starting with template then alternating between ai and human messages
+    :param output: AI response: string
+    :return: AI response
+    """
     chat_model = ChatOpenAI(
         openai_api_key=os.getenv("OPENAI_API_KEY"),
         verbose=True,
